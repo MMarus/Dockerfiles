@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:latest-devel-gpu-py3
 
-##sbr_classifier deps
+#deps
 RUN pip3 --no-cache-dir install \
     xgboost \
     gensim \
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-#pylucene for sbr_classifier
+#pylucene
 RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 RUN wget -O - https://ftp-master.debian.org/keys/archive-key-8.asc | apt-key add -
 RUN wget -O - https://ftp-master.debian.org/keys/archive-key-8-security.asc | apt-key add -
