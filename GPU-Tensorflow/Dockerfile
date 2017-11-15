@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:latest-devel-gpu-py3
 
-#deps
+# pip deps
 RUN pip3 --no-cache-dir install \
     xgboost \
     gensim \
@@ -10,7 +10,10 @@ RUN pip3 --no-cache-dir install \
     keras \
     pandas \
     numpy \
-    scipy
+    scipy \
+    matplotlib \
+    cython \
+    h5py
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ant \
@@ -49,13 +52,7 @@ RUN make all install JCC='python3 -m jcc' ANT=ant PYTHON=python NUM_FILES=8
 WORKDIR ..
 RUN rm -rf pylucene
 
-
-RUN pip3 --no-cache-dir install \
-    sklearn \
-    matplotlib
-
-RUN pip3 --no-cache-dir install cython h5py
-
+# the newst sckitlearn
 RUN git clone git://github.com/scikit-learn/scikit-learn.git && \
     cd scikit-learn && \
     python3 setup.py build_ext --inplace && \
